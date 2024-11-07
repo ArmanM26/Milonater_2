@@ -1,0 +1,53 @@
+/* Контейнер для подсказок */
+.lifelines-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Контейнер для кнопок подсказок */
+.lifeline-buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+/* Кнопки подсказок */
+.lifeline-btn {
+  background: linear-gradient(145deg, #2b3350, #232846);
+  color: #00aaff;
+  border: 2px solid #00aaff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-weight: bold;
+}
+
+.lifeline-btn:hover {
+  background-color: #00aaff;
+  color: #232846;
+  transform: scale(1.05);
+}
+
+.lifeline-btn:disabled {
+  background-color: #444b5e;
+  color: #888cae;
+  border-color: #444b5e;
+  cursor: not-allowed;
+}
+
+/* Сообщение подсказки */
+.hint-message {
+  background-color: #1b1f3b;
+  color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  width: 80%;
+  text-align: center;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+  font-size: 14px;
+  font-style: italic;
+}

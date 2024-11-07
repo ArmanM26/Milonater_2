@@ -1,0 +1,40 @@
+/* Контейнер для таблицы призов */
+.prize-ladder {
+  background-color: #0b0f20;
+  padding: 20px;
+  border-radius: 10px;
+  width: 200px;
+  margin: auto;
+  font-family: 'Roboto', sans-serif;
+  color: #ffffff;
+}
+
+/* Стили для каждого элемента приза */
+.prize-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 5px 0;
+  font-size: 18px;
+  border: 2px solid #1b1f3b;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+/* Номер приза */
+.prize-number {
+  color: #8890b3;
+}
+
+/* Сумма приза */
+.prize-amount {
+  font-weight: bold;
+}
+
+/* Выделение текущего приза */
+.prize-item.current {
+  background-color: #00aaff;
+  color: #0b0f20;
+  font-weight: bold;
+  transform: scale(1.05);
+}

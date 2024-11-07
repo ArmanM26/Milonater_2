@@ -1,0 +1,213 @@
+/* Global settings */
+body {
+  background-color: #111; /* Dark background */
+  color: #fff; /* White text */
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/* Container for the login form */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full viewport height */
+  width: 500px;
+  background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
+}
+
+/* Game container */
+.game-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #1d1d1d; /* Dark background for the game container */
+  border-radius: 20px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Header */
+h1 {
+  font-size: 48px;
+  color: #ffd700; /* Gold */
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Shadow for text */
+}
+
+/* Timer */
+.timer {
+  font-size: 24px;
+  color: #ffd700; /* Gold */
+  margin-bottom: 20px;
+}
+
+/* Question container */
+.question-container h2 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+/* Answer buttons */
+.answers button {
+  width: 70%;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 15px;
+  margin: 10px 0;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.answers button:hover {
+  background-color: #0056b3; /* Darker blue */
+}
+
+.answers button.correct {
+  background-color: #28a745; /* Green for correct */
+}
+
+.answers button.incorrect {
+  background-color: #dc3545; /* Red for incorrect */
+}
+
+.answers button:active {
+  transform: scale(0.98); /* Shrink effect on click */
+}
+
+/* Info section (score, prize) */
+.info {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.info p {
+  font-size: 20px;
+  font-weight: bold;
+  color: #f8f8f8;
+}
+
+/* Lifelines container */
+.lifelines-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.lifelines-container button {
+  padding: 12px 30px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.lifelines-container button:hover {
+  background-color: #218838;
+}
+
+.lifelines-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Hint message */
+.hint-message {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #333;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  color: #fff;
+  border-radius: 8px;
+}
+
+/* Result screen */
+.result {
+  font-size: 36px;
+  color: #ffd700; /* Gold */
+  font-weight: bold;
+}
+
+/* Lifeline Modal */
+.lifeline-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lifeline-modal .modal-content {
+  background-color: #1f1f1f;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 500px;
+}
+
+.lifeline-modal .modal-content h2 {
+  font-size: 24px;
+  color: #fff;
+}
+
+.lifeline-modal .modal-content p {
+  font-size: 18px;
+  color: #fff;
+}
+
+.lifeline-modal .modal-content button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.lifeline-modal .modal-content button:hover {
+  background-color: #218838;
+}
+
+.lifeline-modal .modal-content button:active {
+  transform: scale(0.98);
+}
+
+/* Start/Restart button (for result screen and general use) */
+button {
+  font-size: 20px;
+  padding: 15px 30px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+button:active {
+  transform: scale(0.98);
+}

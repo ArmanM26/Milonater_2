@@ -1,0 +1,66 @@
+/* styles.css */
+
+/* Container for the registration form */
+.register-container {
+    display: flex; /* Use flexbox for centering */
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    height: 100vh; /* Full viewport height */
+    background-color: #f4f4f4; /* Light background color */
+    font-family: Arial, sans-serif; /* Font for the text */
+    width: 500px;
+  }
+  
+  /* Heading styles */
+  .register-container h2 {
+    margin-bottom: 20px; /* Space below the heading */
+    color: #333; /* Dark color for the heading */
+  }
+  
+  /* Form group styles */
+  .form-group {
+    width: 300px; /* Fixed width for form groups */
+    margin-bottom: 15px; /* Space between groups */
+  }
+  
+  /* Label styles */
+  .form-group label {
+    display: block; /* Make label block-level */
+    margin-bottom: 5px; /* Space below the label */
+    font-weight: bold; /* Bold font for labels */
+  }
+  
+  /* Input field styles */
+  .form-group input {
+    width: 100%; /* Full width of the container */
+    padding: 10px; /* Padding inside the input */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px; /* Font size for input text */
+  }
+  
+  /* Error message styles */
+  .error {
+    color: red; /* Red color for error messages */
+    font-size: 14px; /* Font size for error messages */
+  }
+  
+  /* Button styles */
+  button {
+    width: 100%; /* Full width of the container */
+    padding: 10px; /* Padding inside the button */
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* White text color */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px; /* Font size for button text */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+  }
+  
+  /* Button hover effect */
+  button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+  }
+  

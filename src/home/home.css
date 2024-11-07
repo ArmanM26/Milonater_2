@@ -1,0 +1,135 @@
+/* Container for the whole game layout */
+.home-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  background-color: #1a1a2e;
+  height: 100vh;
+  color: white;
+}
+
+/* Question and answer section */
+.question-container {
+  flex: 2;
+  max-width: 60%;
+  background-color: #1e1e30;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.question-container h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #ffffff;
+  background-color: #2e2e4a;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.timer {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffbf00;
+  margin-bottom: 20px;
+}
+
+.answers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.answers button {
+  background-color: #2e2e4a;
+  color: white;
+  font-size: 1.2rem;
+  padding: 15px;
+  border: 2px solid #2e2e4a;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.answers button:hover {
+  background-color: #3d3d5c;
+  border-color: #4a4a6a;
+}
+
+.answers button.correct {
+  background-color: #4caf50;
+}
+
+.answers button.incorrect {
+  background-color: #f44336;
+}
+
+/* Score and Start button */
+.score {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffbf00;
+  margin-top: 20px;
+}
+
+button {
+  background-color: #00aaff;
+  color: white;
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #0088cc;
+}
+
+/* Prize Ladder section */
+.prize-ladder-container {
+  /* width: 25%; */
+  background-color: #0f1a3b;
+  padding: 20px;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.prize-ladder-container ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.prize-ladder-container ul li {
+  background-color: #1e1e30;
+  color: #ffffff;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.prize-ladder-container ul li.active {
+  background-color: #009688;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+/* Overall styling adjustments */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #1a1a2e;
+}
+
+h2, .timer, .score, .answers button, .prize-ladder-container ul li {
+  color: white;
+}
