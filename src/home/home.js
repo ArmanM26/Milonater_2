@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import questions from "../questions/questions";
+import questionsData from "../questions/questions";
 import Hints from "../hints/hints";
 import PrizeLadder from "../prizeLadder/PrizeLadder";
 import "./home.css";
@@ -10,12 +10,13 @@ import winMusic from "../music/winMusic.mp3";
 import loseMusic from "../music/loseMusic.mp3";
 
 const Home = () => {
+  const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [currentPrizeIndex, setCurrentPrizeIndex] = useState(0); // Start at $100 prize
+  const [currentPrizeIndex, setCurrentPrizeIndex] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
-  const [timeLeft, setTimeLeft] = useState(100); // Timer set to 100 seconds
+  const [timeLeft, setTimeLeft] = useState(100);
   const [moveToNextPrize, setMoveToNextPrize] = useState(false);
   const [lifelinesUsed, setLifelinesUsed] = useState({
     fiftyFifty: false,
@@ -23,9 +24,7 @@ const Home = () => {
     phoneFriend: false,
   });
   const [gameStarted, setGameStarted] = useState(false);
-  const [availableAnswers, setAvailableAnswers] = useState(
-    questions[0].answers
-  ); // Initial answers
+  const [availableAnswers, setAvailableAnswers] = useState([]);
 
   const backgroundAudio = useRef(new Audio(backgroundMusic));
   const loseAudio = useRef(new Audio(loseMusic));
@@ -39,30 +38,37 @@ const Home = () => {
 
   useEffect(() => {
     if (gameStarted && timeLeft > 0) {
-      const newTimer = setInterval(() => {
+      const timer = setInterval(() => {
         setTimeLeft((prevTime) => prevTime - 1);
       }, 1000);
-      return () => clearInterval(newTimer);
+      return () => clearInterval(timer);
+    } else if (timeLeft === 0) {
+      handleTimeout();
     }
   }, [timeLeft, gameStarted]);
 
   const startGame = () => {
     if (!gameStarted) {
       setGameStarted(true);
-      setTimeLeft(100); // Reset timer to 100 seconds
+      setQuestions(shuffleQuestions(questionsData).slice(0, 15));
+      setTimeLeft(100);
       setCurrentQuestion(0);
-      setCurrentPrizeIndex(0); // Reset to the lowest prize level
+      setCurrentPrizeIndex(0);
       setShowResult(false);
       setLifelinesUsed({
         fiftyFifty: false,
         askAudience: false,
         phoneFriend: false,
       });
-      setAvailableAnswers(questions[0].answers);
+      setAvailableAnswers(shuffleQuestions(questionsData[0].answers));
       playBackgroundMusic();
     } else {
       onRestart();
     }
+  };
+
+  const shuffleQuestions = (questionsArray) => {
+    return questionsArray.sort(() => Math.random() - 0.5);
   };
 
   const playBackgroundMusic = () => {
@@ -73,37 +79,40 @@ const Home = () => {
     }
   };
 
-  const stopAllMusic = () => {
+  const stopBackgroundMusic = () => {
     backgroundAudio.current.pause();
-    loseAudio.current.pause();
-    winAudio.current.pause();
   };
 
   const handleAnswer = (answer, index) => {
-    if (!gameStarted) return; // Do nothing if the game hasn't started yet
+    if (!gameStarted) return;
 
     setSelectedAnswer(index);
     if (answer === questions[currentQuestion].correct) {
       setIsCorrect(true);
-      setMoveToNextPrize(true); // Correct answer logic
-      setCurrentPrizeIndex(currentPrizeIndex + 1); // Update prize ladder after correct answer
+      setMoveToNextPrize(true);
+      setCurrentPrizeIndex(currentPrizeIndex + 1);
+      stopBackgroundMusic(); // Stop background music only
+      playWinMusic();
+
       setTimeout(() => {
         setSelectedAnswer(null);
         setIsCorrect(null);
+
         if (currentQuestion < questions.length - 1) {
           setCurrentQuestion(currentQuestion + 1);
-          setAvailableAnswers(questions[currentQuestion + 1].answers);
-          setTimeLeft(100); // Reset the timer to 100 seconds for the new question
-          setMoveToNextPrize(false); // Reset moveToNextPrize after each question
+          setAvailableAnswers(
+            shuffleQuestions(questions[currentQuestion + 1].answers)
+          );
+          setTimeLeft(100); // Reset timer for next question
+          setMoveToNextPrize(false);
+          playBackgroundMusic(); // Resume background music for next question
         } else {
-          stopAllMusic();
-          playWinMusic();
           setShowResult(true);
         }
       }, 1000);
     } else {
       setIsCorrect(false);
-      stopAllMusic();
+      stopBackgroundMusic();
       playLoseMusic();
       setTimeout(() => onRestart(), 1000);
     }
@@ -111,7 +120,7 @@ const Home = () => {
 
   const handleTimeout = () => {
     setIsCorrect(false);
-    stopAllMusic();
+    stopBackgroundMusic();
     playLoseMusic();
     setSelectedAnswer(null);
     setTimeout(() => onRestart(), 1000);
@@ -120,23 +129,20 @@ const Home = () => {
   const onRestart = () => {
     setGameStarted(false);
     setCurrentQuestion(0);
-    setCurrentPrizeIndex(0); // Reset to the lowest prize level
+    setCurrentPrizeIndex(0);
     setShowResult(false);
     setSelectedAnswer(null);
     setIsCorrect(null);
-    setAvailableAnswers(questions[0].answers);
-    setTimeLeft(100); // Reset the timer to 100 seconds
+    setTimeLeft(100);
   };
 
   const playLoseMusic = () => {
-    stopAllMusic();
     loseAudio.current.play().catch((error) => {
       console.error("Error playing losing music:", error);
     });
   };
 
   const playWinMusic = () => {
-    stopAllMusic();
     winAudio.current.play().catch((error) => {
       console.error("Error playing winning music:", error);
     });
@@ -145,9 +151,8 @@ const Home = () => {
   return (
     <div className="main-container">
       <div className="home-container">
-        {/* Question and answer section */}
         <div className="question-container">
-          <h2>{questions[currentQuestion].question}</h2>
+          <h2>{questions[currentQuestion]?.question}</h2>
           <div className="timer">Time Left: {timeLeft} seconds</div>
           <div className="answers">
             {availableAnswers.map((answer, index) => (
@@ -161,25 +166,31 @@ const Home = () => {
                       : "incorrect"
                     : ""
                 }
-                disabled={!gameStarted} // Disable the buttons until the game starts
+                disabled={!gameStarted}
               >
                 {String.fromCharCode(65 + index)}: {answer}
               </button>
             ))}
           </div>
-          <Hints
-            currentQuestion={currentQuestion}
-            lifelinesUsed={lifelinesUsed}
-            setLifelinesUsed={setLifelinesUsed}
-            questions={questions}
-            setAvailableAnswers={setAvailableAnswers}
-          />
+          {gameStarted && (
+            <Hints
+              currentQuestion={currentQuestion}
+              lifelinesUsed={lifelinesUsed}
+              setLifelinesUsed={setLifelinesUsed}
+              questions={questions}
+              setAvailableAnswers={setAvailableAnswers}
+            />
+          )}
           <button onClick={startGame}>
             {gameStarted ? "Restart" : "Start Game"}
           </button>
         </div>
 
-        {/* Prize Ladder section */}
+        {showResult && (
+          <div className="result">
+            Congratulations! You've completed the game!
+          </div>
+        )}
       </div>
       <PrizeLadder
         currentPrizeIndex={currentPrizeIndex}
