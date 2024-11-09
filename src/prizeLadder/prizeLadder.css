@@ -1,40 +1,85 @@
-/* Контейнер для таблицы призов */
-.prize-ladder {
-  background-color: #0b0f20;
-  padding: 20px;
-  border-radius: 10px;
-  width: 200px;
-  margin: auto;
+/* Prize ladder container */
+/* .prize-ladder {
+  width: 300px;
   font-family: 'Roboto', sans-serif;
   color: #ffffff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px auto;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  margin-left: -190px;
+  bottom: -500px;
+} */
+.prize-ladder {
+  width: 800px; /* ширина квадрата */
+  height: 300px; /* высота квадрата */
+  background-color: #191a2c; /* цвет фона */
+  color: #fff; /* цвет текста */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute; /* для свободного перемещения */
+  left: 0px;
+  top: 650px;
+  flex-direction: column;
 }
 
-/* Стили для каждого элемента приза */
+
+/* Styles for each prize item */
 .prize-item {
   display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  margin: 5px 0;
-  font-size: 18px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #7f78ff;
+  border-radius: 8px;
   border: 2px solid #1b1f3b;
-  border-radius: 5px;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.3s ease;
+  color: #ffffff;
+  margin: 5px;
+  cursor: pointer;
+  min-width: 80px;
+  text-align: center;
 }
 
-/* Номер приза */
+/* Prize number styling */
 .prize-number {
-  color: #8890b3;
-}
-
-/* Сумма приза */
-.prize-amount {
   font-weight: bold;
 }
 
-/* Выделение текущего приза */
+/* Highlight the current prize */
 .prize-item.current {
-  background-color: #00aaff;
+  background-color: #00ffc7;
   color: #0b0f20;
   font-weight: bold;
+  transform: scale(1.1);
+}
+
+/* Styles for each row (4 items per row) */
+.prize-row {
+  display: flex;
+  justify-content: space-around;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+/* Hover effect for the prize items */
+.prize-item:hover {
+  background-color: #333d5d;
   transform: scale(1.05);
+}
+
+/* Mobile responsiveness: Stack rows for smaller screens */
+@media (max-width: 768px) {
+  .prize-ladder {
+    width: 90%;
+  }
+
+  .prize-row {
+    flex-direction: column;
+    align-items: center;
+  }
 }

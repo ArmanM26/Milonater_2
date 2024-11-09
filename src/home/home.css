@@ -1,41 +1,49 @@
-/* Container for the whole game layout */
-.home-container {
+/* Main container aligns its children horizontally */
+.main-container {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: center; /* Center the content in the middle */
   padding: 20px;
   background-color: #1a1a2e;
-  height: 100vh;
+  height: 1000px;
   color: white;
+  box-sizing: border-box;
+  position: relative;
+  width: 800px;
 }
 
-/* Question and answer section */
+.home-container {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  justify-content: flex-start;
+  width: 80%;
+  max-width: 1200px;
+  border-radius: 10px;
+  overflow-y: auto; /* Добавлено для прокрутки, если контент больше */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  height: 580px; /* Фиксированная высота */
+  position: relative;
+  margin-left: 150px;
+}
+
+/* Question container styling */
 .question-container {
   flex: 2;
-  max-width: 60%;
   background-color: #1e1e30;
   padding: 20px;
-  border-radius: 8px;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  color: white;
+  overflow: hidden; /* Для скрытия контента, выходящего за пределы */
 }
 
-.question-container h2 {
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-  color: #ffffff;
-  background-color: #2e2e4a;
-  padding: 15px;
-  border-radius: 8px;
-}
 
+/* Timer styling */
 .timer {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #ffbf00;
-  margin-bottom: 20px;
+  font-size: 1.2rem;
+  margin-top: 10px;
+  color: #ffeb3b;
 }
 
+/* Answer button styling */
 .answers {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -48,15 +56,15 @@
   color: white;
   font-size: 1.2rem;
   padding: 15px;
-  border: 2px solid #2e2e4a;
+  border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: 0.3s;
+  width: 220px;
 }
 
 .answers button:hover {
   background-color: #3d3d5c;
-  border-color: #4a4a6a;
 }
 
 .answers button.correct {
@@ -67,69 +75,31 @@
   background-color: #f44336;
 }
 
-/* Score and Start button */
-.score {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #ffbf00;
-  margin-top: 20px;
-}
-
+/* Start/Restart button styling */
 button {
-  background-color: #00aaff;
+  background-color: #4caf50;
   color: white;
-  font-size: 1.2rem;
   padding: 10px 20px;
-  margin-top: 20px;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
+  font-size: 1rem;
   cursor: pointer;
   transition: 0.3s;
+  margin-top: 20px;
 }
 
 button:hover {
-  background-color: #0088cc;
+  background-color: #45a049;
 }
 
-/* Prize Ladder section */
-.prize-ladder-container {
-  /* width: 25%; */
-  background-color: #0f1a3b;
-  padding: 20px;
-  border-radius: 8px;
-  color: #ffffff;
-  font-size: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .home-container {
+    flex-direction: column;
+    width: 90%;
+  }
 
-.prize-ladder-container ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.prize-ladder-container ul li {
-  background-color: #1e1e30;
-  color: #ffffff;
-  padding: 10px;
-  margin-bottom: 5px;
-  border-radius: 4px;
-  text-align: center;
-}
-
-.prize-ladder-container ul li.active {
-  background-color: #009688;
-  font-weight: bold;
-  color: #ffffff;
-}
-
-/* Overall styling adjustments */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #1a1a2e;
-}
-
-h2, .timer, .score, .answers button, .prize-ladder-container ul li {
-  color: white;
+  .question-container {
+    width: 100%;
+  }
 }

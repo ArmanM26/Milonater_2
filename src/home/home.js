@@ -1,24 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 import questions from "../questions/questions";
-import money from "../money/money";
-import Score from "../score/Score";
 import Hints from "../hints/hints";
 import PrizeLadder from "../prizeLadder/PrizeLadder";
 import "./home.css";
 
-// Import your audio files
+// Import audio files
 import backgroundMusic from "../music/backgroundMusic.mp3";
 import winMusic from "../music/winMusic.mp3";
 import loseMusic from "../music/loseMusic.mp3";
 
 const Home = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [currentPrizeIndex, setCurrentPrizeIndex] = useState(14); // Start at the lowest prize level
+  const [currentPrizeIndex, setCurrentPrizeIndex] = useState(0); // Start at $100 prize
   const [showResult, setShowResult] = useState(false);
-  const [score, setScore] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
   const [timeLeft, setTimeLeft] = useState(100); // Timer set to 100 seconds
+  const [moveToNextPrize, setMoveToNextPrize] = useState(false);
   const [lifelinesUsed, setLifelinesUsed] = useState({
     fiftyFifty: false,
     askAudience: false,
@@ -51,10 +49,9 @@ const Home = () => {
   const startGame = () => {
     if (!gameStarted) {
       setGameStarted(true);
-      setTimeLeft(100);
+      setTimeLeft(100); // Reset timer to 100 seconds
       setCurrentQuestion(0);
-      setScore(0);
-      setCurrentPrizeIndex(14); // Reset to the lowest prize level
+      setCurrentPrizeIndex(0); // Reset to the lowest prize level
       setShowResult(false);
       setLifelinesUsed({
         fiftyFifty: false,
@@ -83,18 +80,21 @@ const Home = () => {
   };
 
   const handleAnswer = (answer, index) => {
+    if (!gameStarted) return; // Do nothing if the game hasn't started yet
+
     setSelectedAnswer(index);
     if (answer === questions[currentQuestion].correct) {
       setIsCorrect(true);
-      setScore(score + 1);
-      setCurrentPrizeIndex(14 - score); // Move up the prize ladder
-
+      setMoveToNextPrize(true); // Correct answer logic
+      setCurrentPrizeIndex(currentPrizeIndex + 1); // Update prize ladder after correct answer
       setTimeout(() => {
         setSelectedAnswer(null);
         setIsCorrect(null);
         if (currentQuestion < questions.length - 1) {
           setCurrentQuestion(currentQuestion + 1);
           setAvailableAnswers(questions[currentQuestion + 1].answers);
+          setTimeLeft(100); // Reset the timer to 100 seconds for the new question
+          setMoveToNextPrize(false); // Reset moveToNextPrize after each question
         } else {
           stopAllMusic();
           playWinMusic();
@@ -120,13 +120,12 @@ const Home = () => {
   const onRestart = () => {
     setGameStarted(false);
     setCurrentQuestion(0);
-    setScore(0);
-    setCurrentPrizeIndex(14); // Reset to the lowest prize level
+    setCurrentPrizeIndex(0); // Reset to the lowest prize level
     setShowResult(false);
     setSelectedAnswer(null);
     setIsCorrect(null);
     setAvailableAnswers(questions[0].answers);
-    setTimeLeft(100);
+    setTimeLeft(100); // Reset the timer to 100 seconds
   };
 
   const playLoseMusic = () => {
@@ -144,52 +143,48 @@ const Home = () => {
   };
 
   return (
-    <div className="home-container">
-      <div className="question-container">
-        {!showResult ? (
-          <>
-            <h2>{questions[currentQuestion].question}</h2>
-            <div className="timer">Time Left: {timeLeft} seconds</div>
+    <div className="main-container">
+      <div className="home-container">
+        {/* Question and answer section */}
+        <div className="question-container">
+          <h2>{questions[currentQuestion].question}</h2>
+          <div className="timer">Time Left: {timeLeft} seconds</div>
+          <div className="answers">
+            {availableAnswers.map((answer, index) => (
+              <button
+                key={index}
+                onClick={() => handleAnswer(answer, index)}
+                className={
+                  selectedAnswer === index
+                    ? isCorrect
+                      ? "correct"
+                      : "incorrect"
+                    : ""
+                }
+                disabled={!gameStarted} // Disable the buttons until the game starts
+              >
+                {String.fromCharCode(65 + index)}: {answer}
+              </button>
+            ))}
+          </div>
+          <Hints
+            currentQuestion={currentQuestion}
+            lifelinesUsed={lifelinesUsed}
+            setLifelinesUsed={setLifelinesUsed}
+            questions={questions}
+            setAvailableAnswers={setAvailableAnswers}
+          />
+          <button onClick={startGame}>
+            {gameStarted ? "Restart" : "Start Game"}
+          </button>
+        </div>
 
-            <div className="answers">
-              {availableAnswers.map((answer, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleAnswer(answer, index)}
-                  className={
-                    selectedAnswer === index
-                      ? isCorrect
-                        ? "correct"
-                        : "incorrect"
-                      : ""
-                  }
-                >
-                  {String.fromCharCode(65 + index)}: {answer}
-                </button>
-              ))}
-            </div>
-
-            <Hints
-              currentQuestion={currentQuestion}
-              lifelinesUsed={lifelinesUsed}
-              setLifelinesUsed={setLifelinesUsed}
-              questions={questions}
-              setAvailableAnswers={setAvailableAnswers}
-            />
-
-            <div className="score">Score: {score}</div>
-
-            <button onClick={startGame}>
-              {gameStarted ? "Restart" : "Start Game"}
-            </button>
-          </>
-        ) : (
-          <Score score={score} />
-        )}
+        {/* Prize Ladder section */}
       </div>
-      <div className="prize-ladder-container">
-        <PrizeLadder currentPrizeIndex={currentPrizeIndex} />
-      </div>
+      <PrizeLadder
+        currentPrizeIndex={currentPrizeIndex}
+        moveToNextPrize={moveToNextPrize}
+      />
     </div>
   );
 };

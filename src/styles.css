@@ -9,14 +9,13 @@ body {
   display: flex; /* Flexbox for centering content */
   justify-content: center; /* Horizontally center */
   align-items: center; /* Vertically center */
-  background-image: url('./images/background.avif'); /* Add a background image if needed */
+  background-image: url('./images/background.avif'); /* Background image */
   background-size: cover; /* Cover the entire screen */
   background-position: center;
 }
 
 /* Container for the app */
 .app-container {
-  /* max-width: 600px; Maximum width for the app */
   margin: auto; /* Center the app */
   padding: 20px; /* Inner padding */
   background-color: #ffffff; /* White background for the app */
@@ -25,7 +24,7 @@ body {
   opacity: 0.9; /* Slight transparency */
 }
 
-/* Container for questions */
+/* Container for the question section */
 .question-container {
   background-color: #ffffff; /* White background for questions */
   border: 1px solid #ccc; /* Gray border */
@@ -34,14 +33,13 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Light shadow */
   height: 400px;
   width: 500px;
-
 }
 
 /* Heading for the question */
 h2 {
   color: #333; /* Dark text color */
   margin-bottom: 20px; /* Bottom margin */
-  font-size: 1.8em; /* Increase font size for the question */
+  font-size: 1.8em; /* Larger font size for the question */
 }
 
 /* Styles for the answers list */
@@ -55,11 +53,11 @@ ul {
 li {
   background-color: #007bff; /* Blue background */
   color: white; /* White text */
-  padding: 12px; /* Padding for buttons */
+  padding: 12px; /* Padding for answer options */
   margin: 10px 0; /* Margin between options */
   border-radius: 5px; /* Rounded corners */
   cursor: pointer; /* Pointer cursor */
-  transition: background-color 0.3s, transform 0.1s; /* Smooth transition for background and scale */
+  transition: background-color 0.3s, transform 0.1s; /* Smooth transition */
   font-size: 1.2em; /* Larger font size for better readability */
 }
 
@@ -71,10 +69,10 @@ li:hover {
 
 /* Styles for the score display */
 .score {
-  font-size: 1.5em; /* Increase font size */
+  font-size: 1.5em; /* Larger font size */
   margin-top: 20px; /* Top margin */
   color: #333; /* Dark text color */
-  font-weight: bold; /* Make score bold */
+  font-weight: bold; /* Bold font */
   padding: 10px; /* Inner padding */
   background-color: #e0f7fa; /* Light cyan background */
   border: 1px solid #b2ebf2; /* Cyan border */
@@ -83,7 +81,7 @@ li:hover {
 
 /* Styles for the current prize display */
 .prize {
-  font-size: 1.5em; /* Increase font size */
+  font-size: 1.5em; /* Larger font size */
   color: #007bff; /* Blue color for the prize */
   margin-top: 10px; /* Top margin */
   font-weight: bold;
@@ -91,10 +89,10 @@ li:hover {
 
 /* Styles for the result message */
 .result {
-  font-size: 1.5em; /* Increase font size */
+  font-size: 1.5em; /* Larger font size */
   color: #28a745; /* Green color for success */
   margin-top: 20px; /* Top margin */
-  text-align: center; /* Center the text */
+  text-align: center; /* Center text */
   padding: 20px; /* Inner padding */
   background-color: #e8f5e9; /* Light green background */
   border: 1px solid #c8e6c9; /* Light green border */
@@ -129,7 +127,7 @@ li:hover {
 /* Add additional styles for small screen responsiveness */
 @media screen and (max-width: 768px) {
   .app-container {
-      width: 90%; /* Make the container more responsive */
+      width: 90%; /* More responsive container width */
   }
   
   h2 {

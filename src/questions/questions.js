@@ -64,6 +64,67 @@ const questions = [
     ],
     correct: "Pacific Ocean",
   },
+  // New questions added:
+  {
+    question: "What is the smallest country in the world by land area?",
+    answers: ["Monaco", "San Marino", "Vatican City", "Liechtenstein"],
+    correct: "Vatican City",
+  },
+  {
+    question: "Who was the first president of the United States?",
+    answers: [
+      "George Washington",
+      "Thomas Jefferson",
+      "Abraham Lincoln",
+      "John Adams",
+    ],
+    correct: "George Washington",
+  },
+  {
+    question: "What is the largest desert in the world?",
+    answers: [
+      "Sahara Desert",
+      "Arabian Desert",
+      "Gobi Desert",
+      "Antarctic Desert",
+    ],
+    correct: "Antarctic Desert",
+  },
+  {
+    question: "Which element has the chemical symbol 'O'?",
+    answers: ["Oxygen", "Osmium", "Ozone", "Opium"],
+    correct: "Oxygen",
+  },
+  {
+    question: "Which continent is known as the 'Dark Continent'?",
+    answers: ["Asia", "Africa", "Australia", "Antarctica"],
+    correct: "Africa",
+  },
+  {
+    question: "What is the largest island in the world?",
+    answers: ["Australia", "Greenland", "New Guinea", "Borneo"],
+    correct: "Greenland",
+  },
+  {
+    question: "Who discovered penicillin?",
+    answers: [
+      "Marie Curie",
+      "Isaac Newton",
+      "Alexander Fleming",
+      "Louis Pasteur",
+    ],
+    correct: "Alexander Fleming",
+  },
+  {
+    question: "What is the tallest mountain in the world?",
+    answers: ["K2", "Mount Kilimanjaro", "Mount Everest", "Mount McKinley"],
+    correct: "Mount Everest",
+  },
+  {
+    question: "Which country is home to the Great Barrier Reef?",
+    answers: ["Australia", "United States", "Canada", "Brazil"],
+    correct: "Australia",
+  },
 ];
 
 export default questions;
